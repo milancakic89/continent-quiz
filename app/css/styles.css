@@ -1,0 +1,15 @@
+*{
+    margin:0;
+    padding: 0;
+}
+body{
+    font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
+}
+.main{
+    border:1px solid red;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+

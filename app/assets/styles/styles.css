@@ -1,0 +1,11 @@
+@import 'modules/_colors.css';
+@import 'modules/_globalSetup.css';
+
+.main{
+    border:1px solid red;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
