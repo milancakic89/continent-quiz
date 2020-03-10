@@ -6,7 +6,7 @@ body{
     font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
 }
 .main{
-    border:1px solid red;
+    border:1px solid blue;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
