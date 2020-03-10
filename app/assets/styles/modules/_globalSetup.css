@@ -1,7 +1,9 @@
 *{
     margin:0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
     font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
+    height: 100%;
 }

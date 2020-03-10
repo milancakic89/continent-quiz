@@ -21,6 +21,15 @@ gulp.task("watch", function(){
         })
     })
 
+    gulp.task("cssInject", ["styles"], function(){
+        return gulp.src("app/css/styles.css")
+        .pipe(browserSync.stream())
+    })
+    
     gulp.task('scriptsRefresh', function(){
-        browserSync.reload();
+        gulp.start('scripts');
+        setTimeout(() => {
+            browserSync.reload();
+        }, 200);
+
     })

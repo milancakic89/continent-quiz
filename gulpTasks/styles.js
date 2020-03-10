@@ -13,7 +13,3 @@ gulp.task("styles", function(){
  })
 
  
-gulp.task("cssInject", ["styles"], function(){
-    return gulp.src("app/css/styles.css")
-    .pipe(browserSync.stream())
-})

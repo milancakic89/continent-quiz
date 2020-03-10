@@ -1,15 +1,89 @@
 *{
     margin:0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
     font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
+    height: 100%;
 }
 .main{
-    border:1px solid blue;
+    position: relative;
+    border:1px solid rgb(90, 90, 126);
     max-width: 500px;
+    padding: 10px;
     width: 100%;
+    height: calc(100vh - 40px);
     margin: 0 auto;
     text-align: center;
+    
 }
+.main h4{
+        text-align: left;
+        margin-left:10px;
+    }
+.main h1{
+        text-align: left;
+        font-weight: 400;
+        margin-left:10px;
+    }
+.main__score{
+        width:90%;
+        height: 62px;
+        display: grid;
+        grid-template-rows: auto auto;
+        border-bottom: 1px solid gray;
+        margin: 30px 15px;
+    }
+.main__score p{
+               width:60px;
+               display: inline-block;
+               height: 60px;
+               font-weight:700;
+               padding:11px;
+               font-size:1.7rem;
+               border:3px solid rgb(12, 207, 126);
+               border-radius:8px;
+
+           }
+.main__score__leder{
+               align-self: center;
+               margin-top:-50px;
+           }
+.main__score__date{
+               color: rgb(177, 177, 177);
+           }
+.main__score__points{
+               font-weight: 700;
+               font-size: 1.6rem;
+           }
+.main .home-icon,
+    .main .play-icon{
+        font-size: 3rem !important;
+        padding: 5px;
+        position: absolute;
+        bottom: 30px;
+        border-radius: 8px;
+    }
+.main .home-icon{
+        left: 30px;
+        background-color: orange;
+        color: #fff;
+    }
+.main .play-icon{
+        left: 115px;
+        background-color: rgb(12, 207, 126);
+        color: #fff;
+
+    }
+.main .home-icon:hover{
+        cursor: pointer;
+        color: #fff;
+        background-color: blue;
+
+    }
+.main .play-icon:hover{
+        background-color: orange;
+        cursor: pointer;
+    }
 
