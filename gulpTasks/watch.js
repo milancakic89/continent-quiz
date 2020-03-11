@@ -30,6 +30,6 @@ gulp.task("watch", function(){
         gulp.start('scripts');
         setTimeout(() => {
             browserSync.reload();
-        }, 200);
+        }, 2000);
 
     })
