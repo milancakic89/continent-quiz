@@ -16,4 +16,13 @@
         border: 2px solid orange;
         border-radius:10px;
     }
+    &__next{
+        width: 300px;
+        background-color: rgb(1, 168, 85);
+        padding: 10px;
+        color: #fff;
+        font-size: 1rem;
+        border: none;
+        border-radius: 10px;
+    }
 }
