@@ -1,10 +1,11 @@
+const Render = require('./_Render');
 class Questions{
     constructor(){
         this.correctAnswer = null;
         this.wrongAnswers = [];
     }
 
-    static async getQuestions(){
+    static async fetchQuestions(){
 
       const wrongQuestions = [];
        fetch("https://api.myjson.com/bins/a6da9")
@@ -32,25 +33,25 @@ class Questions{
             let secondWrongQuesionList = firstWrongQuestionList.filter(quest=>{
                 return quest.continent !== firstWrongQuestion.continent;
             })
+            //assigning second wrong question
             let secondWrongQuesion = secondWrongQuesionList[Math.round(Math.random() * secondWrongQuesionList.length)];
             wrongQuestions.push(secondWrongQuesion);
             this.wrongAnswers = wrongQuestions;
 
-            console.log(this.correctAnswer.continent)
-            console.log(this.wrongAnswers[1].continent)
-            console.log(this.wrongAnswers[0].continent)
-
+            Render.renderScreen(this.correctAnswer, this.wrongAnswers);
 
         })
         .catch(err=>console.log(err));
 
     }
-    static getCorrectAnswer(){
-        //
+    static getQuestions(){
+       return {
+           correctAnswer: this.correctAnswer,
+           wrongAnswers: this.wrongAnswers
+       }
+   
     }
-    static createQuestion(){
 
-    }
     static resetGame(){
         this.correctAnswer = null;
         this.wrongAnswers = [];
@@ -58,8 +59,4 @@ class Questions{
     }
 }
 
-document.getElementById('play').addEventListener('click', letsPlay);
-
-function letsPlay(){
-    Questions.getQuestions();
-}
+module.exports = Questions;

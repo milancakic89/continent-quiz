@@ -1,5 +1,6 @@
 @import 'modules/_colors.css';
 @import 'modules/_globalSetup.css';
+@import 'modules/_screen.css';
 
 .main{
     position: relative;
@@ -50,12 +51,17 @@
                font-size: 1.6rem;
            }
     }
+    nav{
+        position: absolute;
+        width: 100%;
+        padding-left: 15px;
+        text-align: left;
+        bottom: 30px;
+    }
     .home-icon,
     .play-icon{
         font-size: 3rem !important;
         padding: 5px;
-        position: absolute;
-        bottom: 30px;
         border-radius: 8px;
     }
     .home-icon{

@@ -7,6 +7,25 @@ body{
     font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
     height: 100%;
 }
+.main__screen{
+    width:100%;
+    min-height: 300px;
+}
+.main__screen__img{
+        width: 90%;
+        margin:0 auto;
+        max-height: 300px;
+    }
+.main__screen__button{
+        display: block;
+        padding: 20px;
+        margin: 10px auto;
+        width: 70%;
+        font-size: 1rem;
+        font-weight: 700;
+        border: 2px solid orange;
+        border-radius:10px;
+    }
 .main{
     position: relative;
     border:1px solid rgb(90, 90, 126);
@@ -57,12 +76,17 @@ body{
                font-weight: 700;
                font-size: 1.6rem;
            }
+.main nav{
+        position: absolute;
+        width: 100%;
+        padding-left: 15px;
+        text-align: left;
+        bottom: 30px;
+    }
 .main .home-icon,
     .main .play-icon{
         font-size: 3rem !important;
         padding: 5px;
-        position: absolute;
-        bottom: 30px;
         border-radius: 8px;
     }
 .main .home-icon{
