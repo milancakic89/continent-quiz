@@ -29,6 +29,12 @@ class Game{
     setCorrectAnswer(correct){
         this.correctAnswer = correct;
     }
+    resetGame(){
+        this.counter = 0;
+        this.score = 0;
+        this.over = false;
+        this.correctAnswer = null;
+    }
 
 }
 module.exports = Game;

@@ -10,23 +10,75 @@ body{
 .main__screen{
     width:100%;
     min-height: 300px;
+
 }
-.main__screen__img{
-        width: 90%;
-        margin:0 auto;
-        max-height: 300px;
+.in-game{
+    font-size: 1.2rem;
+}
+.hidden{
+    display: none;
+}
+.result__screen{
+    position: relative;
+    border:1px solid rgb(90, 90, 126);
+    max-width: 500px;
+    padding: 20px;
+    width: 100%;
+    height: calc(100vh - 40px);
+    margin: 0 auto;
+    text-align: center;
+}
+.result__screen__play-again{
+        border: none;
+        padding:15px 20px;  
+        background-color:#FFBB00;
+        font-size:1.2rem;
+        width:50%;
+        color: #fff;
+        border-radius:25px;
     }
-.main__screen__button{
-        display: block;
-        padding: 20px;
-        margin: 10px auto;
-        width: 70%;
-        font-size: 1rem;
-        font-weight: 700;
-        border: 2px solid orange;
-        border-radius:10px;
+.result__screen__play-again:hover{
+        background-color:#00A1F1;
+        cursor: pointer;
     }
-.main__screen__next{
+.result__screen__view-scores{
+        border: none;
+        padding:10px 15px;
+        background-color:#8a8a8a;
+        font-size:1rem;
+        color: rgb(255, 255, 255);
+        border-radius:25px;
+    }
+.result__screen__view-scores:hover{
+        background-color:#494949;
+        color: #fff;
+        cursor: pointer;
+    }
+.result__screen__h1{
+        font-size: 3rem;
+        color: #F65314;
+    }
+.result__screen__score-container{
+        color: #7CBB00;
+    }
+.centered-v-h{
+    position: absolute;
+    width:100%;
+    top:50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.question{
+    position: relative;
+    border:1px solid rgb(90, 90, 126);
+    max-width: 500px;
+    padding: 5px;
+    width: 100%;
+    height: calc(100vh - 40px);
+    margin: 0 auto;
+    text-align: center;
+}
+.question__next{
         width: 300px;
         background-color: rgb(1, 168, 85);
         padding: 10px;
@@ -35,8 +87,33 @@ body{
         border: none;
         border-radius: 10px;
     }
-.in-game{
-    font-size: 1.2rem;
+.question__img{
+        width: 90%;
+        margin:0 auto;
+        max-height: 250px;
+        min-width: 300px;
+    }
+.question__button{
+        display: block;
+        padding: 20px;
+        margin: 5px auto;
+        width: 70%;
+        font-size: 1rem;
+        font-weight: 700;
+        border: 2px solid orange;
+        border-radius:10px;
+    }
+.question__h5,
+    .question__h4{
+        text-align: left;
+    }
+.correct-answer{
+    background-color: green;
+    color: #fff;
+}
+.wrong-answer{
+    background-color: red;
+    color: #fff;
 }
 .main{
     position: relative;

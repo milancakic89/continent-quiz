@@ -4,6 +4,23 @@ const Questions = require('./includes/_Questions');
 const newGame = new Game();
 const newQuestions = new Questions();
 
+let mainScreen = document.getElementById('startscreen');
+let questionScreen = document.getElementById('question-screen');
+let resultScreen = document.querySelector('.result__screen');
+
+let buttonPlay = document.getElementById('play');
+let buttonPlayAgain = document.getElementById('play-again');
+let buttonBackToStart = document.getElementById('back-to-main');
+
+let buttonOne = document.querySelector('.buttonOne');
+let buttonTwo = document.querySelector('.buttonTwo');
+let buttonThree = document.querySelector('.buttonThree');
+let buttonNext = document.querySelector('.buttonNext');
+
+let questionCounter = document.getElementById('question-count');
+let img = document.getElementById('image-url');
+
+
 /*
     NOTE: I HAVE DESIDED TO MAKE ENTIRE GAME TROUGHT JS, I COULD USE EASIER APROACH
           WITH MORE HTML AND CSS, AND LESS JS... PRACTICING VANILA JS IS MY MAIN GOAL HERE,
@@ -24,7 +41,7 @@ getQuestions()
 });
 
 //adding an event listener to play button at start
-document.querySelector('#play').addEventListener('click', letsPlay);
+buttonPlay.addEventListener('click', letsPlay);
 
 function letsPlay(){
     //checking if the questions are stored
@@ -37,9 +54,13 @@ function letsPlay(){
 
 // function for creating correct answer and two random wrong answers
 function getQuestionsList(){
+     buttonOne.className = 'question__button buttonOne';
+     buttonTwo.className = 'question__button buttonTwo';
+     buttonThree.className = 'question__button buttonThree';
+     buttonNext.className = 'question__next buttonNext hidden';
 
     //since this function will be called more than once, making sure game is not over
-    if(newGame.isOver() !== true && newGame.getCounter() <5){
+    if(newGame.isOver() !== true && newGame.getCounter() !==5){
 
         //storing all questions in variable
         let questionsList = newQuestions.getQuestions();
@@ -74,61 +95,54 @@ function getQuestionsList(){
         //we have one correct, and two wrong question, we can move on
         renderQuestion(correctAnswer, wrongAnswers);
     }else{
-        //show result screen
+        questionScreen.classList.add('hidden');
+        resultScreen.classList.remove('hidden');
+        document.getElementById('score-container').textContent = newGame.getScore();
+
+        buttonPlayAgain.addEventListener('click', letsPlayAgain);
+        buttonBackToStart.addEventListener('click', backToStart);
     }
+}
+function backToStart(){
+    newGame.resetGame();
+    resultScreen.classList.add('hidden');
+    mainScreen.classList.remove('hidden');
+}
+function letsPlayAgain(){
+    newGame.resetGame();
+    getQuestionsList();
+    questionScreen.classList.remove('hidden');
+    resultScreen.classList.add('hidden');
 }
 //
 function renderQuestion(correctAnswer, wrongAnswers){
-    //rendering stuff
+    
+    let questionListWithThree = [correctAnswer, wrongAnswers[0], wrongAnswers[1]];
+    let firstContinent = questionListWithThree[Math.round(Math.random()*2)] 
+
+    let questionListWithTwo = questionListWithThree.filter(item=> item.continent !== firstContinent.continent);
+    let secondContinent = questionListWithTwo[Math.round(Math.random())];
+
+    let questionListWithOne = questionListWithTwo.filter(item=> item.continent !== secondContinent.continent);
+    let thirdContinent = questionListWithOne[0];
+
     //current question to be displayed;
     let questionOnScreen = newGame.getCounter();
 
-    /*
-         only if current counter is 0 means we have pressed play button
-         for the first time, and we want to remove it from screen
-    */
-    if(questionOnScreen === 0){
-            document.querySelector('.icons').remove();
-    }
     //clean screen, this will be called on each question, we clean previous, then we render next
-    let currentScreen = document.querySelector('#game-screen');
-        while(currentScreen.firstChild){
-            currentScreen.removeChild(currentScreen.firstChild);
-        }
-    
     //screen is cleaned, we can now render question
     newGame.updateCounter();
 
     //current question on screen
     questionOnScreen = newGame.getCounter();
    
-    //targeting main div, we will append all on this later
-    let screen = document.querySelector('#game-screen');
-
-    //targeting information text, question counter will be stored here
-    let info = document.querySelector("#info");
-
-    //adding class for some styling
-    info.className = 'in-game';
-
     //adding current question value to be displayed
-    info.textContent = `Question: ${questionOnScreen}`;
+    questionCounter.textContent = `Question: ${questionOnScreen}`;
 
-    //creating img element
-    let img = document.createElement('img');
-    img.className = 'main__screen__img';
-    img.style = "width:90%; min-height:300px";
     img.src = correctAnswer.image;
 
-    screen.appendChild(img);
-
-    let buttonOne = document.createElement('button');
-    let buttonTwo = document.createElement('button');
-    let buttonThree = document.createElement('button');
-
-    buttonOne.className = 'main__screen__button buttonOne';
-    buttonTwo.className = 'main__screen__button buttonTwo';
-    buttonThree.className = 'main__screen__button buttonThree';
+    mainScreen.classList.add('hidden');
+    questionScreen.classList.remove('hidden');
 
     /*
         We cant just append buttons now, the answer would be allways on same spot.
@@ -143,14 +157,6 @@ function renderQuestion(correctAnswer, wrongAnswers){
         witch one is actualy correct.
     */
 
-    let questionListWithThree = [correctAnswer, wrongAnswers[0], wrongAnswers[1]];
-    let firstContinent = questionListWithThree[Math.round(Math.random()*2)] 
-
-    let questionListWithTwo = questionListWithThree.filter(item=> item.continent !== firstContinent.continent);
-    let secondContinent = questionListWithTwo[Math.round(Math.random())];
-
-    let questionListWithOne = questionListWithTwo.filter(item=> item.continent !== secondContinent.continent);
-    let thirdContinent = questionListWithOne[0];
 
     //adding continents as values
     buttonOne.value = firstContinent.continent;
@@ -172,9 +178,6 @@ function renderQuestion(correctAnswer, wrongAnswers){
     buttonTwo.addEventListener('click', checkAnswer);
     buttonThree.addEventListener('click', checkAnswer);
 
-    screen.appendChild(buttonOne);
-    screen.appendChild(buttonTwo);
-    screen.appendChild(buttonThree);
 }
 
 
@@ -183,28 +186,25 @@ function checkAnswer(e){
    let picked = e.target.value;
    let correct = newGame.getCorrectAnswer();
 
+   let gotIt;
    //if we got correct answer, that button will be displayed green
    //but if we not, we need to make button red, but also correct green
    //we will use this variable to check for that
-   let gotIt;
-   
+
    if(picked === correct){
        newGame.updateScore(750);
        gotIt = true;
    }
+
    //creating button NEXT
-   let next = document.createElement('button');
-   next.className = "main__screen__next";
-   next.textContent = "Next";
 
    //assigning the same function as play at the beggining to event listener-
    //we updated counter and score if needed, we will start same process again
-   next.addEventListener('click', getQuestionsList);
+   buttonNext.addEventListener('click', getQuestionsList);
+   buttonNext.classList.remove('hidden')
 
    /*
     here is why i created ids on those buttons before.
-
-
    */
    let a = document.getElementById(`${picked}`);
    let b = document.getElementById(`${correct}`);
@@ -215,20 +215,6 @@ function checkAnswer(e){
         a.classList.add('wrong-answer');
         b.classList.add('correct-answer')
    }
-
-
-/*
-   TARGET MAIN DIV AND MAKE BUTTONS BE DISABLED
-   a.classList.add(a.id === correct ? 'correct-answer' : 'wrong-answer');
-   b.classList.add(b.id === correct ? 'correct-answer' : 'wrong-answer');
-
-*/
-
-   let screen = document.querySelector('#game-screen');
-
-
-   screen.appendChild(next)
-   
 
 }
 

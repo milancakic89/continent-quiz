@@ -9,7 +9,8 @@
     <title>Continent Quiz</title>
 </head>
 <body>
-   <main class="main">
+    <!-- start screen -->
+<main class="main" id="startscreen">
         <h4>Continent Quiz</h4>
         <h1 id="info">Your Scores</h1>
 
@@ -32,9 +33,37 @@
             <i class="material-icons home-icon" >home</i>
             <i class="material-icons play-icon" id="play">play_circle_filled</i>
         </nav>
+</main>  
+    <!-- end of start screen -->  
+
+    <!-- question screen --> 
+<main class="question hidden" id="question-screen">
+    <h5 class="question__h5">Continent Quiz</h5>
+    <h4 class="question__h4" id="question-count"></h4>
+    <img src='#' class="main__screen__img" id="image-url" style="width:90%; max-height:250px; min-height: 240px;"/>
+    <button class="question__button buttonOne">asdas</button><br>
+    <button class="question__button buttonTwo">sdsad</button><br>
+    <button class="question__button buttonThree">sadas</button><br>
+    <button class="question__next buttonNext hidden">Next</button>
+
+</main> 
+  <!-- end of question screen --> 
+
+  <!-- result screen --> 
+  
+  <main class="result__screen hidden" id="result-screen">
+    <div class="centered-v-h">
+        <h1 class="result__screen__h1">Your Score is:</h1><br>
+        <h2 class="result__screen__score-container" id="score-container"></h2><br>
+        <button class="result__screen__play-again" id="play-again">Play Again</button><br><br>
+        <button class="result__screen__view-scores" id="back-to-main">Back to Main Screen</button>
+    </div>
+</main>
 
 
-   </main>
+
+
+ 
    <script src="./bundle/app.bundle.js"></script>
 </body>
 </html>

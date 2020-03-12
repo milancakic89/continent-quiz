@@ -2,6 +2,8 @@
 @import 'modules/_globalSetup.css';
 @import 'modules/_screen.css';
 @import 'modules/_game.css';
+@import 'modules/_result.css';
+@import 'modules/_questions.css';
 
 .main{
     position: relative;
