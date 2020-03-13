@@ -3,7 +3,9 @@ $firstPlace: rgb(255,215,0);
 $secondPlace: rgb(211,211,211);
 $thirdPlace: rgb(205,127,50);
 
-$buttonGreen: #7CBB00;
+$buttonGreen: rgb(3, 141, 76);
+$buttonRed: rgb(225,30,10);
+$buttonBlue: rgb(3, 96, 184);
 $buttonHover: #00A1F1;
 $buttonYellow: #FFBB00;
 $scoreText: #F65314;

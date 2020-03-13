@@ -17,3 +17,4 @@ exports.buttonNext = document.querySelector('.buttonNext');
 exports.questionCounter = document.getElementById('question-count');
 exports.scoreContainer = document.getElementById('score-container');
 exports.img = document.getElementById('image-url');
+exports.scoreOnScreen = document.getElementById('score-holder');

@@ -85,16 +85,21 @@
         background-color: orange;
         cursor: pointer;
     }
-    .correct-answer{
-        background-color: green;
-    }
-    .wrong-answer{
-        background-color: red;
-    }
+
     
+}
+
+.correct-answer{
+    background-color: $buttonGreen;
+    color: #fff;
+}
+.wrong-answer{
+    background-color: $buttonRed;
+    color: #fff;
 }
 @media(max-width: 700px){
     .main{
         height: calc(100vh - 40px);
+        border: none;
     }
 }

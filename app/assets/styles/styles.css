@@ -1,10 +1,11 @@
 @import 'modules/_colors.css';
 @import 'modules/_globalSetup.css';
+@import 'modules/_main.css';
 @import 'modules/_screen.css';
 @import 'modules/_game.css';
 @import 'modules/_result.css';
 @import 'modules/_questions.css';
 @import 'modules/_home.css';
-@import 'modules/_main.css';
+
 
 

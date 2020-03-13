@@ -1,6 +1,5 @@
-
-function setLocalStorage(score){
-    let score = newGame.getScore();
+exports.setLocalStorage = function(scores){
+    //let score = newGame.getScore();
     let date = new Date();
 
     let d = date.getDay();
@@ -8,7 +7,7 @@ function setLocalStorage(score){
     let y = date.getFullYear();
     let fullDate = d + '/'+ m + '/' +y;
 
-    let scoreObject = {score: score, date: fullDate}
+    let scoreObject = {score: scores, date: fullDate}
     let topThreeScores = localStorage.getItem('scores');
 
     if(!topThreeScores){
@@ -27,7 +26,7 @@ function setLocalStorage(score){
     }
  
 }
-function getLocalStorage(){
+exports.getLocalStorage = function(){
     let scores;
     let sortedScores;
     let currentScores = localStorage.getItem('scores');

@@ -28,6 +28,7 @@ function letsPlay(){
 
 // function for creating correct answer and two random wrong answers
 function getQuestionsList(){
+    
     //this function is called on every question, question needs to be enabled
     //because they are all disabled once the user clicks on any button
      Elements.buttonOne.disabled = false;
@@ -74,7 +75,7 @@ function getQuestionsList(){
         //game over, display results and save score to local storage
         Elements.questionScreen.classList.add('hidden');
         Elements.resultScreen.classList.remove('hidden');
-        Elements.document.getElementById('score-container').textContent = newGame.getScore();
+        Elements.scoreContainer.textContent = newGame.getScore();
 
         Elements.buttonPlayAgain.addEventListener('click', letsPlayAgain);
         Elements.buttonBackToStart.addEventListener('click', backToStart);
@@ -101,6 +102,9 @@ function letsPlayAgain(){
 }
 //responsible for creating questions and injecting values into buttons
 function renderQuestion(correctAnswer, wrongAnswers){
+    let scoreOnScreen = newGame.getScore();
+
+    Elements.scoreOnScreen.textContent = scoreOnScreen;
     /*
         we have questions we need.
         We cant just set values in buttons, the answer would be allways on same spot.
@@ -115,7 +119,7 @@ function renderQuestion(correctAnswer, wrongAnswers){
     */
     
     let questionListWithThree = [correctAnswer, wrongAnswers[0], wrongAnswers[1]];
-    let firstContinent = questionListWithThree[Math.round(Math.random()*2)] 
+    let firstContinent = questionListWithThree[Math.round(Math.random()*2)]
 
     let questionListWithTwo = questionListWithThree.filter(item=> item.continent !== firstContinent.continent);
     let secondContinent = questionListWithTwo[Math.round(Math.random())];
@@ -133,13 +137,10 @@ function renderQuestion(correctAnswer, wrongAnswers){
      questionOnScreen = newGame.getCounter();
    
     //adding current question value to be displayed
-     questionCounter.textContent = `Question: ${questionOnScreen}`;
+    Elements.questionCounter.textContent = `Question: ${questionOnScreen}`;
 
     //displaying image on screen
-     img.src = correctAnswer.image;
-
-     Elements.mainScreen.classList.add('hidden');
-     Elements.questionScreen.classList.remove('hidden');
+    Elements.img.src = correctAnswer.image;
 
     //adding continents as values
      Elements.buttonOne.value = firstContinent.continent;
@@ -160,6 +161,9 @@ function renderQuestion(correctAnswer, wrongAnswers){
      Elements.buttonOne.addEventListener('click', checkAnswer);
      Elements.buttonTwo.addEventListener('click', checkAnswer);
      Elements.buttonThree.addEventListener('click', checkAnswer);
+
+     Elements.mainScreen.classList.add('hidden');
+     Elements.questionScreen.classList.remove('hidden');
 }
 function checkAnswer(e){
 

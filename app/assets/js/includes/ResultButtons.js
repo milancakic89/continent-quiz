@@ -1,10 +1,13 @@
+const Elements = require('./Elements');
+const LS = require('./LS');
+
 exports.goToHome = function(){
-    homeScreen.classList.remove('hidden');
-    mainScreen.classList.add('hidden');
+    Elements.homeScreen.classList.remove('hidden');
+    Elements.mainScreen.classList.add('hidden');
     LS.getLocalStorage();
 }
 exports.jumpToLedderboard = function(){
-    homeScreen.classList.add('hidden');
-    mainScreen.classList.remove('hidden');
+    Elements.homeScreen.classList.add('hidden');
+    Elements.mainScreen.classList.remove('hidden');
     LS.getLocalStorage();
 }

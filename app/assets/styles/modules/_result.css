@@ -55,5 +55,6 @@
 @media(max-width: 700px){
     .result__screen{
         height: calc(100vh - 40px);
+        border: none;
     }
 }

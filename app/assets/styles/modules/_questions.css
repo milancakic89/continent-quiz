@@ -1,6 +1,6 @@
 .question{
     position: relative;
-    border:1px solid rgb(90, 90, 126);
+    border:1px solid rgb(0, 0, 0);
     max-width: 500px;
     padding: 5px;
     width: 100%;
@@ -11,17 +11,22 @@
     &__next{
         width: 300px;
         background-color: rgb(1, 168, 85);
-        padding: 10px;
+        padding: 12px;
         color: #fff;
         font-size: 1rem;
         border: none;
         border-radius: 10px;
+        border: 2px solid rgb(56, 54, 54);
+    }
+    &__next:hover{
+        background-color: $buttonGreen;
     }
     &__img{
         width: 90%;
-        margin:0 auto;
+        margin:20px auto;
         max-height: 250px;
         min-width: 300px;
+       
     }
     &__button{
         display: block;
@@ -29,25 +34,37 @@
         margin: 5px auto;
         width: 70%;
         font-size: 1rem;
+        color: black;
         font-weight: 700;
-        border: 2px solid orange;
+        border: 2px solid rgb(56, 54, 54);
+        
         border-radius:10px;
     }
     &__h5,
     &__h4{
         text-align: left;
     }
+    &__h3{
+        position: absolute;
+        right:10px;
+        top: 18px;
+        color: $buttonBlue;
+    }
 }
 .correct-answer{
-    background-color: green;
+    background-color: $buttonGreen;
     color: #fff;
 }
 .wrong-answer{
-    background-color: red;
+    background-color: $buttonRed;
     color: #fff;
+}
+#score-holder{
+    color: $buttonYellow;
 }
 @media(max-width: 700px){
     .question{
         height: calc(100vh - 40px);
+        border: none;
     }
 }
