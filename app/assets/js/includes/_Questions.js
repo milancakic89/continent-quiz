@@ -1,13 +1,6 @@
-class Questions{
-    constructor(){
-        this.questions = null;
-    }
-    setQuestions(questions){
-        this.questions = questions;
-    }
-    getQuestions(){
-        return this.questions;
-    }
-}
+exports.getQuestions = async function(){
 
-module.exports = Questions;
+    const result = await fetch('https://api.myjson.com/bins/a6da9');
+    const questions = await result.json();
+    return questions;
+}

@@ -2,8 +2,14 @@ const Game = require('./includes/_Game');
 const Questions = require('./includes/_Questions');
 
 const newGame = new Game();
-const newQuestions = new Questions();
 
+let questionsList = null;
+
+let scoreOne = document.getElementById('best-scores-first');
+let scoreTwo = document.getElementById('best-scores-second');
+let scoreThree = document.getElementById('best-scores-third');
+
+let homeScreen = document.getElementById('home-screen');
 let mainScreen = document.getElementById('startscreen');
 let questionScreen = document.getElementById('question-screen');
 let resultScreen = document.querySelector('.result__screen');
@@ -11,6 +17,8 @@ let resultScreen = document.querySelector('.result__screen');
 let buttonPlay = document.getElementById('play');
 let buttonPlayAgain = document.getElementById('play-again');
 let buttonBackToStart = document.getElementById('back-to-main');
+let homeButtonPlay = document.getElementById('home-button-play');
+let buttonGoToHome = document.getElementById('go-to-home');
 
 let buttonOne = document.querySelector('.buttonOne');
 let buttonTwo = document.querySelector('.buttonTwo');
@@ -26,18 +34,28 @@ let img = document.getElementById('image-url');
           WITH MORE HTML AND CSS, AND LESS JS... PRACTICING VANILA JS IS MY MAIN GOAL HERE,
           AND I WOULD APPRITIATE NOTICE ON ANY MISTAKE I MADE.
 */
+buttonGoToHome.addEventListener('click', goToHome);
+homeButtonPlay.addEventListener('click', jumpToLedderboard);
 
-async function getQuestions(){
 
-    const result = await fetch('https://api.myjson.com/bins/a6da9');
-    const questions = await result.json();
-    return questions;
+function goToHome(){
+    homeScreen.classList.remove('hidden');
+    mainScreen.classList.add('hidden');
+    getLocalStorage();
 }
+function jumpToLedderboard(){
+    homeScreen.classList.add('hidden');
+    mainScreen.classList.remove('hidden');
+    getLocalStorage();
+}
+
+
 // fetching questions
-getQuestions()
+Questions.getQuestions()
 .then(result=>{
     // storing questions
-    newQuestions.setQuestions(result);
+    questionsList = result;
+   //- newQuestions.setQuestions(result);
 });
 
 //adding an event listener to play button at start
@@ -45,8 +63,7 @@ buttonPlay.addEventListener('click', letsPlay);
 
 function letsPlay(){
     //checking if the questions are stored
-    if(newQuestions.getQuestions() !== null){
-
+   if(questionsList !== null){
         //calling the function that will handle questions 
         getQuestionsList();
     }; 
@@ -54,6 +71,9 @@ function letsPlay(){
 
 // function for creating correct answer and two random wrong answers
 function getQuestionsList(){
+     buttonOne.disabled = false;
+     buttonTwo.disabled = false;
+     buttonThree.disabled = false;
      buttonOne.className = 'question__button buttonOne';
      buttonTwo.className = 'question__button buttonTwo';
      buttonThree.className = 'question__button buttonThree';
@@ -63,7 +83,7 @@ function getQuestionsList(){
     if(newGame.isOver() !== true && newGame.getCounter() !==5){
 
         //storing all questions in variable
-        let questionsList = newQuestions.getQuestions();
+        
 
         //array for 2 wrong questions
         let wrongAnswers = [];
@@ -95,18 +115,26 @@ function getQuestionsList(){
         //we have one correct, and two wrong question, we can move on
         renderQuestion(correctAnswer, wrongAnswers);
     }else{
+
         questionScreen.classList.add('hidden');
         resultScreen.classList.remove('hidden');
         document.getElementById('score-container').textContent = newGame.getScore();
 
         buttonPlayAgain.addEventListener('click', letsPlayAgain);
         buttonBackToStart.addEventListener('click', backToStart);
+
+        setLocalStorage();
     }
 }
 function backToStart(){
+    
     newGame.resetGame();
     resultScreen.classList.add('hidden');
     mainScreen.classList.remove('hidden');
+    
+    getLocalStorage();
+    
+   
 }
 function letsPlayAgain(){
     newGame.resetGame();
@@ -183,6 +211,8 @@ function renderQuestion(correctAnswer, wrongAnswers){
 
 
 function checkAnswer(e){
+
+
    let picked = e.target.value;
    let correct = newGame.getCorrectAnswer();
 
@@ -211,10 +241,87 @@ function checkAnswer(e){
 
    if(gotIt){
         b.classList.add('correct-answer')
+
    }else{
         a.classList.add('wrong-answer');
         b.classList.add('correct-answer')
+
    }
+   buttonOne.disabled = true;
+   buttonTwo.disabled = true;
+   buttonThree.disabled = true;
 
 }
 
+function setLocalStorage(){
+    let score = newGame.getScore();
+    let date = new Date();
+
+    let d = date.getDay();
+    let m = date.getMonth();
+    let y = date.getFullYear();
+    let fullDate = d + '/'+ m + '/' +y;
+
+    let scoreObject = {score: score, date: fullDate}
+    let topThreeScores = localStorage.getItem('scores');
+
+    if(!topThreeScores){
+        topThreeScores = []
+        topThreeScores.push(scoreObject);
+        let scoreToStorage = JSON.stringify(topThreeScores);
+        localStorage.setItem('scores', scoreToStorage);
+    
+      
+    }else{
+        let newScores = JSON.parse(topThreeScores);
+        newScores.push(scoreObject);
+
+        let newStorageScores = JSON.stringify(newScores)
+        localStorage.setItem('scores',newStorageScores);
+    }
+ 
+}
+function getLocalStorage(){
+    let scores;
+    let sortedScores;
+    let currentScores = localStorage.getItem('scores');
+    
+    if(currentScores){
+        scores = JSON.parse(currentScores);
+       
+        if(scores.length === 1){
+            scoreOne.textContent = scores[0].score;
+            scoreOne.previousElementSibling.previousElementSibling.textContent = 'On:' + scores[0].date;
+        }
+        //sort highest scores
+        if(scores.length > 1){
+            sortedScores = scores.sort(function(a, b){
+                return b.score - a.score;
+            });
+        }
+        if(scores.length === 2){
+            scoreOne.textContent = sortedScores[0].score;
+            scoreOne.previousElementSibling.previousElementSibling.textContent = 'On: '+ sortedScores[0].date;
+
+            scoreTwo.textContent = sortedScores[1].score;
+            scoreTwo.previousElementSibling.previousElementSibling.textContent = 'On: '+ sortedScores[1].date;
+        }
+        if(scores.length >= 3){
+            scoreOne.textContent = sortedScores[0].score;
+            scoreOne.previousElementSibling.previousElementSibling.textContent = 'On: '+ sortedScores[0].date;
+
+            scoreTwo.textContent = sortedScores[1].score;
+            scoreTwo.previousElementSibling.previousElementSibling.textContent = 'On: '+ sortedScores[1].date;
+
+            scoreThree.textContent = sortedScores[2].score;
+            scoreThree.previousElementSibling.previousElementSibling.textContent = 'On: '+ sortedScores[2].date;
+
+           let newScr =  sortedScores.slice(0,3);
+           let scoreToStr = JSON.stringify(newScr);
+           localStorage.setItem('scores', scoreToStr);
+        }
+        
+    }
+    
+    
+}

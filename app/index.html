@@ -9,28 +9,46 @@
     <title>Continent Quiz</title>
 </head>
 <body>
+    <!--Home page-->
+<main class="home" id="home-screen">
+    <div class="centered-v-h">
+        <h1 class="home__h1">Continent Quiz</h1>
+        <img class="home__img" src="assets/img/earth.gif"/><br>
+        <button class="home__button" id="home-button-play">Play</button>
+    </div>
+</main>
+
+    <!--End of home page--->
+
     <!-- start screen -->
-<main class="main" id="startscreen">
+<main class="main hidden" id="startscreen">
         <h4>Continent Quiz</h4>
         <h1 id="info">Your Scores</h1>
-
         <main id="game-screen" class="main__screen">
             <div class="main__score">
                 <p>#1</p>
+                <div class="main__score__leder">
+                    <span class="main__score__date"></span><br>
+                    <span class="main__score__points" id="best-scores-first"></span>
+                </div>
             </div>
             <div class="main__score">
                 <p>#2</p>
-                    <div class="main__score__leder">
-                        <span class="main__score__date">On 06/02/2020</span><br>
-                        <span class="main__score__points">2300 pts</span>
-                    </div>
+                <div class="main__score__leder">
+                    <span class="main__score__date"></span><br>
+                    <span class="main__score__points" id="best-scores-second"></span>
+                </div>
             </div>
             <div class="main__score">
                 <p>#3</p>
+                <div class="main__score__leder">
+                    <span class="main__score__date"></span><br>
+                    <span class="main__score__points" id="best-scores-third"></span>
+                </div>
             </div>
         </main>
         <nav class="icons">
-            <i class="material-icons home-icon" >home</i>
+            <i class="material-icons home-icon" id="go-to-home">home</i>
             <i class="material-icons play-icon" id="play">play_circle_filled</i>
         </nav>
 </main>  

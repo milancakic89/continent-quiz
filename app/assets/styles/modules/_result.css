@@ -7,7 +7,7 @@
     max-width: 500px;
     padding: 20px;
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh);
     margin: 0 auto;
     text-align: center;
     &__play-again{
@@ -46,8 +46,14 @@
 }
 .centered-v-h{
     position: absolute;
+    text-align: center;
     width:100%;
     top:50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+}
+@media(max-width: 700px){
+    .result__screen{
+        height: calc(100vh - 40px);
+    }
 }
